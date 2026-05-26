@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>СИБКАР Сургут — Автосервис</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Подключение файла стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ШАПКА САЙТА -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">СИБ<span>КАР</span> Сургут</a>
+            <!-- Навигация для десктопа -->
+            <nav class="nav-desktop">
+                <a href="#home">Главная</a>
+                <a href="#services">Услуги</a>
+                <a href="#masters">Мастера</a>
+                <a href="#about">О компании</a>
+                <a href="#brands">Бренды</a>
+                <a href="#blog">Блог</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+            <!-- Кнопка поиска -->
+            <button class="search-btn" onclick="openSearch()" aria-label="Поиск" data-tooltip="Поиск по сайту">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
+            <!-- Кнопка мобильного меню (гамбургер) -->
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Меню">☰</button>
+        </div>
+    </header>
+
+    <!-- МОБИЛЬНОЕ МЕНЮ -->
+    <nav class="nav-mobile" id="mobileMenu">
+        <a href="#home" onclick="closeMenu()">Главная</a>
+        <a href="#services" onclick="closeMenu()">Услуги</a>
+        <a href="#masters" onclick="closeMenu()">Мастера</a>
+        <a href="#about" onclick="closeMenu()">О компании</a>
+        <a href="#brands" onclick="closeMenu()">Бренды</a>
+        <a href="#blog" onclick="closeMenu()">Блог</a>
+        <a href="#contacts" onclick="closeMenu()">Контакты</a>
+        <a href="#contacts" class="btn btn-primary" onclick="closeMenu()">Записаться</a>
+    </nav>
+
+    <!-- МОДАЛЬНОЕ ОКНО ПОИСКА -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <div class="search-modal-header">
+                <h3>Поиск по сайту</h3>
+                <button class="search-close" onclick="closeSearch()">✕</button>
+            </div>
+            <input type="text" class="search-input" id="searchInput" placeholder="Введите запрос..." oninput="searchSite()">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+
+    <!-- КОНТЕЙНЕР ДЛЯ УВЕДОМЛЕНИЙ (TOAST) -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- КНОПКА "НАВЕРХ" -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Наверх">↑</button>
+
+    <!-- ПЛАВАЮЩИЕ КНОПКИ СВЯЗИ -->
+    <div class="fab-container">
+        <a href="https://wa.me/79000000000" target="_blank" class="fab fab-whatsapp" data-tooltip="Написать в WhatsApp" aria-label="WhatsApp">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="tel:+73462000000" class="fab fab-call" data-tooltip="Позвонить" aria-label="Позвонить">📞</a>
+        <button class="fab fab-chat" onclick="openSearch()" data-tooltip="Поиск" aria-label="Поиск">🔍</button>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main>
+        <!-- ГЛАВНЫЙ ЭКРАН (HERO) -->
+        <section id="home" class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Автосервис уровня <span>официального дилера</span></h1>
+                    <p>Профессиональный ремонт и обслуживание автомобилей в Сургуте. Гарантия качества и честные цены.</p>
+                    <div>
+                        <a href="#contacts" class="btn btn-primary">Записаться онлайн</a>
+                        <a href="#services" class="btn btn-outline">Наши услуги</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ УСЛУГ -->
+        <section id="services" data-keywords="услуги ремонт диагностика ТО замена масло двигатель подвеска электрика кузов">
+            <div class="container">
+                <h2 class="section-title">Наши <span>услуги</span></h2>
+                <div class="grid">
+                    <!-- Карточка услуги: Диагностика -->
+                    <article class="card" data-keywords="компьютерная диагностика ошибки сканер">
+                        <span class="badge badge-guarantee">Гарантия</span>
+                        <img src="диагностика.jpg" alt="Диагностика" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22 viewBox=%220 0 400 200%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EДиагностика%3C/text%3E%3C/svg%3E'">
+                        <h3 data-tooltip="Проверка всех систем за 30 минут">Компьютерная диагностика</h3>
+                        <p>Считывание и сброс ошибок, проверка всех систем автомобиля</p>
+                    </article>
+                    <!-- Карточка услуги: ТО -->
+                    <article class="card" data-keywords="ТО техническое обслуживание масло фильтр свечи">
+                        <span class="badge badge-original">Оригинал</span>
+                        <img src="ТО.jpg" alt="ТО" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22 viewBox=%220 0 400 200%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EТО%3C/text%3E%3C/svg%3E'">
+                        <h3 data-tooltip="Масла и фильтры в наличии">Плановое ТО</h3>
+                        <p>Замена масел, фильтров, свечей и других расходников</p>
+                    </article>
+                    <!-- Карточка услуги: Ремонт двигателя -->
+                    <article class="card" data-keywords="двигатель ремонт ДВС капиталка ГБЦ">
+                        <span class="badge badge-urgent">Срочно</span>
+                        <img src="ремонт двигателя.jpg" alt="Двигатель" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22 viewBox=%220 0 400 200%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EДвигатель%3C/text%3E%3C/svg%3E'">
+                        <h3 data-tooltip="Ремонт любой сложности">Ремонт двигателя</h3>
+                        <p>Капитальный и текущий ремонт двигателей любой сложности</p>
+                    </article>
+                    <!-- Карточка услуги: Подвеска -->
+                    <article class="card" data-keywords="подвеска ходовая амортизаторы рычаги развал схождение">
+                        <img src="подвеска.jpg" alt="Подвеска" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22 viewBox=%220 0 400 200%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EПодвеска%3C/text%3E%3C/svg%3E'">
+                        <h3 data-tooltip="3D развал-схождение">Подвеска и ходовая</h3>
+                        <p>Ремонт подвески, развал-схождение 3D</p>
+                    </article>
+                    <!-- Карточка услуги: Автоэлектрика -->
+                    <article class="card" data-keywords="электрика проводка сигнализация автозвук">
+                        <img src="автоэлектрика 1.png" alt="Электрика" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22 viewBox=%220 0 400 200%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EЭлектрика%3C/text%3E%3C/svg%3E'">
+                        <h3 data-tooltip="Диагностика за 15 минут">Автоэлектрика</h3>
+                        <p>Ремонт проводки, установка сигнализаций и автозвука</p>
+                    </article>
+                    <!-- Карточка услуги: Кузовной ремонт -->
+                    <article class="card" data-keywords="кузов покраска полировка вмятины PDR">
+                        <span class="badge badge-guarantee">Гарантия</span>
+                        <img src="кузовной ремонт.webp" alt="Кузов" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22 viewBox=%220 0 400 200%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EКузов%3C/text%3E%3C/svg%3E'">
+                        <h3 data-tooltip="Удаление вмятин без покраски">Кузовной ремонт</h3>
+                        <p>Покраска, полировка, удаление вмятин без покраски</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ МАСТЕРОВ -->
+        <section id="masters" data-keywords="мастера специалисты механики электрики команда" style="background: var(--bg-surface);">
+            <div class="container">
+                <h2 class="section-title">Наши <span>мастера</span></h2>
+                <div class="grid">
+                    <!-- Карточка мастера: Андрей -->
+                    <div class="card master-card" data-keywords="Андрей главный механик двигатель">
+                        <div class="master-avatar">
+                            <img src="Андрей.png" alt="Андрей" onerror="this.style.background='#2D3748'">
+                            <span class="online-status" data-tooltip="Онлайн"></span>
+                        </div>
+                        <h3>Андрей Иванов</h3>
+                        <p style="color: var(--primary); font-weight: 600; margin: 8px 0;">Главный механик</p>
+                        <p style="color: var(--text-muted);">Стаж 12 лет. Специализация: ДВС, АКПП</p>
+                    </div>
+                    <!-- Карточка мастера: Дмитрий -->
+                    <div class="card master-card" data-keywords="Дмитрий автоэлектрик диагностика">
+                        <div class="master-avatar">
+                            <img src="Дмитрий.jpg" alt="Дмитрий" onerror="this.style.background='#2D3748'">
+                            <span class="online-status" data-tooltip="Онлайн"></span>
+                        </div>
+                        <h3>Дмитрий Петров</h3>
+                        <p style="color: var(--primary); font-weight: 600; margin: 8px 0;">Автоэлектрик</p>
+                        <p style="color: var(--text-muted);">Стаж 8 лет. Диагностика сложных неисправностей</p>
+                    </div>
+                    <!-- Карточка мастера: Сергей -->
+                    <div class="card master-card" data-keywords="Сергей подвеска ходовая развал">
+                        <div class="master-avatar">
+                            <img src="Сергей.jpg" alt="Сергей" onerror="this.style.background='#2D3748'">
+                            <span class="online-status" data-tooltip="На выезде"></span>
+                        </div>
+                        <h3>Сергей Козлов</h3>
+                        <p style="color: var(--primary); font-weight: 600; margin: 8px 0;">Мастер по ходовой</p>
+                        <p style="color: var(--text-muted);">Стаж 10 лет. Подвеска, развал-схождение</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ О КОМПАНИИ -->
+        <section id="about" data-keywords="о компании о нас преимущества гарантия запчасти">
+            <div class="container">
+                <h2 class="section-title">О компании <span>СИБКАР</span></h2>
+                <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--text-muted); font-size: 1.1rem;">
+                    <p style="margin-bottom: 20px; line-height: 1.7;">
+                        Работаем в Сургуте с 2015 года. Предоставляем сервис дилерского качества 
+                        по честным ценам. Мы не просто ремонтируем автомобили — мы заботимся о вашей безопасности.
+                    </p>
+                </div>
+                <!-- Статистика компании -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin: 50px 0; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px 20px; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 8px;">8+</div>
+                        <div style="color: var(--text-muted); font-size: 0.95rem;">лет на рынке</div>
+                    </div>
+                    <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px 20px; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 8px;">5000+</div>
+                        <div style="color: var(--text-muted); font-size: 0.95rem;">отремонтированных авто</div>
+                    </div>
+                    <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px 20px; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 8px;">15</div>
+                        <div style="color: var(--text-muted); font-size: 0.95rem;">мастеров в штате</div>
+                    </div>
+                    <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px 20px; text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 8px;">98%</div>
+                        <div style="color: var(--text-muted); font-size: 0.95rem;">довольных клиентов</div>
+                    </div>
+                </div>
+                <!-- Преимущества -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 50px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                    <div style="padding: 25px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; display: flex; align-items: flex-start; gap: 15px;">
+                        <strong style="color: var(--primary); font-size: 1.3rem;">✓</strong>
+                        <div>
+                            <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Гарантия до 12 месяцев</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">На все виды работ и установленные запчасти. Работаем по договору.</p>
+                        </div>
+                    </div>
+                    <div style="padding: 25px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; display: flex; align-items: flex-start; gap: 15px;">
+                        <strong style="color: var(--primary); font-size: 1.3rem;">✓</strong>
+                        <div>
+                            <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Запчасти в наличии</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Собственный склад оригинальных запчастей и качественных аналогов.</p>
+                        </div>
+                    </div>
+                    <div style="padding: 25px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; display: flex; align-items: flex-start; gap: 15px;">
+                        <strong style="color: var(--primary); font-size: 1.3rem;">✓</strong>
+                        <div>
+                            <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Комфортная зона ожидания</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Wi-Fi, кофе, чай. Можете работать или отдыхать во время ремонта.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ БРЕНДОВ -->
+        <section id="brands" data-keywords="бренды марки автомобили Toyota BMW Mercedes Kia Hyundai" style="background: var(--bg-surface);">
+            <div class="container">
+                <h2 class="section-title">Обслуживаемые <span>бренды</span></h2>
+                <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+                    <div class="card brand-card" data-keywords="Toyota Lexus">
+                        <img src="6.png" alt="Toyota Lexus" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EToyota/Lexus%3C/text%3E%3C/svg%3E'">
+                        <div class="brand-name">Toyota / Lexus</div>
+                    </div>
+                    <div class="card brand-card" data-keywords="VAG Audi Volkswagen Skoda">
+                        <img src="1.png" alt="VAG Group" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EVAG%20Group%3C/text%3E%3C/svg%3E'">
+                        <div class="brand-name">VAG Group</div>
+                    </div>
+                    <div class="card brand-card" data-keywords="BMW Mini">
+                        <img src="2.png" alt="BMW Mini" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EBMW/Mini%3C/text%3E%3C/svg%3E'">
+                        <div class="brand-name">BMW / Mini</div>
+                    </div>
+                    <div class="card brand-card" data-keywords="Mercedes Benz">
+                        <img src="3.png" alt="Mercedes" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EMercedes%3C/text%3E%3C/svg%3E'">
+                        <div class="brand-name">Mercedes</div>
+                    </div>
+                    <div class="card brand-card" data-keywords="Kia Hyundai">
+                        <img src="4.png" alt="Kia Hyundai" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EKia/Hyundai%3C/text%3E%3C/svg%3E'">
+                        <div class="brand-name">Kia / Hyundai</div>
+                    </div>
+                    <div class="card brand-card" data-keywords="Mazda Nissan">
+                        <img src="5.png" alt="Mazda Nissan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EMazda/Nissan%3C/text%3E%3C/svg%3E'">
+                        <div class="brand-name">Mazda / Nissan</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ БЛОГА -->
+        <section id="blog" data-keywords="блог статьи советы автовладельцам">
+            <div class="container">
+                <h2 class="section-title">Полезные <span>статьи</span></h2>
+                <div class="grid">
+                    <!-- Статья 1 -->
+                    <article class="card blog-card" data-keywords="зима подготовка аккумулятор печка">
+                        <img src="зима.png" alt="Подготовка к зиме" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EЗима%3C/text%3E%3C/svg%3E'">
+                        <div class="blog-meta">
+                            <span>📅 15 ноября 2025</span>
+                            <span>⏱ 5 мин</span>
+                        </div>
+                        <h3>Как подготовить автомобиль к зиме в условиях ХМАО</h3>
+                        <p>Проверка аккумулятора, печки, замена технических жидкостей и другие важные нюансы подготовки авто к суровой сибирской зиме.</p>
+                        <a href="#" class="read-more">Читать далее →</a>
+                    </article>
+                    <!-- Статья 2 -->
+                    <article class="card blog-card" data-keywords="масло замена интервал двигатель">
+                        <img src="масло.png" alt="Замена масла" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EМасло%3C/text%3E%3C/svg%3E'">
+                        <div class="blog-meta">
+                            <span>📅 28 октября 2025</span>
+                            <span>⏱ 4 мин</span>
+                        </div>
+                        <h3>Как часто нужно менять масло в двигателе?</h3>
+                        <p>Разбираемся с интервалами замены масла, выбираем правильную вязкость и разбираем мифы о «долговечных» маслах.</p>
+                        <a href="#" class="read-more">Читать далее →</a>
+                    </article>
+                    <!-- Статья 3 -->
+                    <article class="card blog-card" data-keywords="шины зима лето когда менять">
+                        <img src="резина.png" alt="Шиномонтаж" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22220%22 viewBox=%220 0 400 220%22%3E%3Crect fill=%22%23151921%22 width=%22400%22 height=%22220%22/%3E%3Ctext fill=%22%2394A3B8%22 font-family=%22sans-serif%22 font-size=%2218%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EШины%3C/text%3E%3C/svg%3E'">
+                        <div class="blog-meta">
+                            <span>📅 10 октября 2025</span>
+                            <span>⏱ 6 мин</span>
+                        </div>
+                        <h3>Когда менять резину: сроки и правила для Сургута</h3>
+                        <p>Оптимальное время для сезонной замены шин, выбор между шипами и липучкой, хранение резины.</p>
+                        <a href="#" class="read-more">Читать далее →</a>
+                    </article>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" class="btn btn-outline">Все статьи</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- СЕКЦИЯ КОНТАКТОВ -->
+        <section id="contacts" data-keywords="контакты адрес телефон карта схема проезда запись">
+            <div class="container">
+                <h2 class="section-title">Контакты и <span>карта</span></h2>
+                
+                <!-- Адреса филиалов -->
+                <div style="margin-bottom: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                    <div class="card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+                        <h3 style="margin-bottom: 15px; font-size: 1.1rem;">ДЦ Профсоюзов</h3>
+                        <p style="margin-bottom: 10px; color: var(--text-muted);">
+                            <a href="tel:+73462983850" style="color: var(--text-muted); text-decoration: none;">+7 3462 98-38-50</a>
+                        </p>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            <a href="https://yandex.ru/maps/?text=Сургут+улица+Профсоюзов+58/1" target="_blank" style="color: var(--text-muted); text-decoration: none;">
+                                Сургут, улица Профсоюзов 58/1
+                            </a>
+                        </p>
+                    </div>
+                    <div class="card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+                        <h3 style="margin-bottom: 15px; font-size: 1.1rem;">Кузовной цех</h3>
+                        <p style="margin-bottom: 10px; color: var(--text-muted);">
+                            <a href="tel:+73462390080" style="color: var(--text-muted); text-decoration: none;">+7 3462 39-00-80</a>
+                        </p>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                            <a href="https://yandex.ru/maps/?text=Сургут+проспект+Набережный+7/1" target="_blank" style="color: var(--text-muted); text-decoration: none;">
+                                Сургут, проспект Набережный 7/1
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contacts-wrapper">
+                    <!-- Контактная информация -->
+                    <div class="contact-info">
+                        <h3>Адрес</h3>
+                        <p>г. Сургут, ул. Промышленная, 12А</p>
+                        <h3>Телефон</h3>
+                        <p><a href="tel:+73462000000" style="color: var(--text-muted); text-decoration: none;">+7 (3462) 00-00-00</a></p>
+                        <h3>Режим работы</h3>
+                        <p>Пн–Сб: 09:00–20:00<br>Вс: выходной</p>
+                        <h3>Мы в соцсетях</h3>
+                        <div class="socials">
+                            <a href="https://t.me/ваш_ник" target="_blank" class="social-link" aria-label="Telegram" data-tooltip="Telegram">
+                                <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                            </a>
+                            <a href="https://youtube.com/@ваш_канал" target="_blank" class="social-link" aria-label="YouTube" data-tooltip="YouTube">
+                                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            </a>
+                        </div>
+                        <!-- Форма обратной связи -->
+                        <form class="contact-form" id="contactForm" data-keywords="форма заявка запись онлайн">
+                            <h3 style="margin-top: 0;">Оставить заявку</h3>
+                            <div class="form-group">
+                                <input type="text" placeholder="Ваше имя" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" placeholder="Телефон" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Опишите проблему" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Отправить</button>
+                        </form>
+                    </div>
+                    <!-- Карта -->
+                    <div class="map-container">
+                        <iframe src="https://yandex.ru/map-widget/v1/?ll=73.404148%2C61.256622&z=14" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ПОДВАЛ САЙТА -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <a href="#" class="footer-logo">СИБ<span>КАР</span></a>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Email">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Telegram">
+                        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Phone">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>О дилере</h4>
+                    <ul>
+                        <li><a href="#about">О компании</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Услуги СТО</h4>
+                    <ul>
+                        <li><a href="#services">Ремонт ходовой части</a></li>
+                        <li><a href="#services">Ремонт тормозной системы</a></li>
+                        <li><a href="#services">Ремонт двигателя</a></li>
+                        <li><a href="#services">Ремонт системы охлаждения</a></li>
+                        <li><a href="#services">Ремонт фар</a></li>
+                        <li><a href="#services">Шиномонтаж</a></li>
+                        <li><a href="#services">Замена масла</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="#">Бонусная программа</a></li>
+                        <li><a href="#">Акции</a></li>
+                        <li><a href="#blog">Блог</a></li>
+                        <li><a href="#">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026. ЗАО "СИБКАР". ИНН: 8602093430/ ОГРН 1028600581162</p>
+                <p>Юр. адрес: 628404. Ханты-Мансийский автономный округ-Югра, г. Сургут, пр-т Набережный 7/1</p>
+                <p class="footer-legal">
+                    Реклама, предложение не является публичной офертой. Оставляя заявку на сайте и/или участвуя в программе лояльности 
+                    <a href="#">вы подтверждаете свое ознакомление и согласие с политикой обработки персональных данных</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Подключение JavaScript файла -->
+  <script src="script.js"></script>
+</body>
+</html>
